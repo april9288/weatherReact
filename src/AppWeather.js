@@ -25,7 +25,7 @@ class AppWeather extends Component {
 	componentDidUpdate() {
 		if (this.state.search > 0 && this.state.weather_result.length === 0) {
 			let encoded_input = encodeURIComponent(this.state.search);
-			let map_address = `http://maps.googleapis.com/maps/api/geocode/json?address=${encoded_input}`;
+			let map_address = `//maps.googleapis.com/maps/api/geocode/json?address=${encoded_input}`;
 			axios(map_address)
 				.then(response => {
 					if (response.data.status === "ZERO_RESULTS") {
