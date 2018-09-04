@@ -5,3 +5,14 @@ body {
   font-family: sans-serif;
   background: linear-gradient(to right, #009999 0%, #336699 100%);
 }
+
+.recharts-cartesian-grid-horizontal line:first-child {
+	stroke-dasharray: 0, 0;
+	stroke-opacity: 0;
+}
+
+.recharts-cartesian-grid-vertical line:first-child {
+	stroke-dasharray: 0, 0;
+	stroke-opacity: 0;
+}
+
