@@ -1,41 +1,53 @@
 import React, { Component } from 'react';
 import SearchBox from './SearchBox';
 import CardMain from './CardMain';
-// import CardLists from './CardLists';
 import CardGraph from './CardGraph';
-import './App.css';
 import axios from 'axios';
-
-let search = "90502"
 
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			weather_result : [],
-			// search : ''
+			search_input: '',
+			locaiton: '',
+			weather_result : ""
 		}
-		this.onInputChange(search);
+		
 	} 
 
+	componentDidMount() {
+		this.onInputChange("90502");
+	}
+
+	search = (event) => {
+    	this.setState({search_input: event.target.value});
+  	}
+
+  	click = () => {
+    	this.onInputChange(this.state.search_input);
+    	this.setState({weather_result : "pending"});
+  	}
+
+
 	onInputChange = (event) => {
-		if (event !== "90502") {
-			search = event.target.value
-		} 
-		let encoded_input = encodeURIComponent(search);
+		//event === zipcode
+
+		let encoded_input = encodeURIComponent(event);
 		let map_address = `//maps.googleapis.com/maps/api/geocode/json?address=${encoded_input}`;
 		axios(map_address)
 				.then(response => {
 					if (response.data.status === "ZERO_RESULTS") {
 						throw new Error("Unable to find that address");
 					} else {
+						// console.log(response.data.results[0].address_components[1].short_name);
+						let location = response.data.results[0].address_components[1].short_name;
+						this.setState({location});
 						let lat = response.data.results[0].geometry.location.lat;
 						let lon = response.data.results[0].geometry.location.lng;
-						// console.log(response.data.results[0].address_components[1].short_name);
-						const API_KEY = '039b4a2ba6bd3cdf82599f6cb429e0f8';
+						const API_KEY = '5aa08ac0612a0f8f60ef7332036c2d97';
 						let weather_API = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${lat},${lon}`;
-						// console.log(weather_API);
 						return axios.get(weather_API);
+						//https://api.darksky.net/forecast/039b4a2ba6bd3cdf82599f6cb429e0f8/30.2228447,-97.74735720000001
 					}
 				})
 				.then(response => this.setState({weather_result: response.data}))	
@@ -49,25 +61,26 @@ class App extends Component {
 	} //end of onInputChange
 
 	render() {
-		if (this.state.weather_result.length === 0) {
-			return (
-				<div>
+		return (
+			<div>
 				<h1 className = 'f1'>Weather</h1>
-				<SearchBox onInput = {this.onInputChange}/>
-				</div>
-				);
-		} else {
-			return (
-				<div>
-				<h1 className = 'f1'>Weather</h1>
-				<SearchBox onInput = {this.onInputChange}/>
-				<CardMain onUpdateInfo = {this.state.weather_result}/>
-				<CardGraph updates = {this.state.weather_result.daily.data}/>
+				<SearchBox 
+					search = {this.search} 
+					search_input = {this.state.search_input}
+					click = {this.click}
+				/>
+			    <CardMain 
+			    	location = {this.state.location}
+			    	onUpdateInfo = {this.state.weather_result}
+
+			    />
+			    {
+			    	(this.state.weather_result === "" || this.state.weather_result === "pending") ? <div></div>:<CardGraph updates = {this.state.weather_result.daily.data}/>
+			    }
 				
-				</div>
-				);
-		}
+			</div>
+			);
 	}
 }
-//<CardLists updates = {this.state.weather_result.daily.data}/>
+
 export default App;
