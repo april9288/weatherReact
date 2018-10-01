@@ -9,7 +9,7 @@ const CardMain = ({location, onUpdateInfo}) => {
 		return (
 			<div className = 'bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5'>
 				<h2 className = 'f4 sans-serif black-80'>{location}</h2>
-				<div class="lds-circle"></div>
+				<div className="lds-circle"></div>
 				<h2 className = 'f5 sans-serif black-80'>{`Calculating`}</h2>	
 			</div>
 			);

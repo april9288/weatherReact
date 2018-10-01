@@ -1,8 +1,8 @@
 {
-  "name": "weather_app",
+  "name": "weatherReact",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://april9288.github.io/weather_app_react/",
+  "homepage": "https://april9288.github.io/weatherReact/",
   "dependencies": {
     "ajv": "^6.5.3",
     "axios": "^0.18.0",

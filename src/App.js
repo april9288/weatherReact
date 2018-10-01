@@ -30,10 +30,9 @@ class App extends Component {
 
 
 	onInputChange = (event) => {
-		//event === zipcode
-
+		let Google_API = "AIzaSyDNbz3odAS6Mfs-Wh-W9zHPUwMDpvC3exk";
 		let encoded_input = encodeURIComponent(event);
-		let map_address = `//maps.googleapis.com/maps/api/geocode/json?address=${encoded_input}`;
+		let map_address = `https://maps.googleapis.com/maps/api/geocode/json?address=${encoded_input}&key=${Google_API}`;
 		axios(map_address)
 				.then(response => {
 					if (response.data.status === "ZERO_RESULTS") {
