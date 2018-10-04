@@ -29,7 +29,7 @@ So it will automatically run in your local server.
 ## Built With
 
 * [React.js](https://reactjs.org/) - The official React.js website
-* [recharts](https://www.npmjs.com/package/recharts) - It's a chart library built with React and D3.
+* [Recharts](https://www.npmjs.com/package/recharts) - It's a chart library built with React and D3.
 
 ## Meta
 
