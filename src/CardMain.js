@@ -4,6 +4,8 @@ import ReactAnimatedWeather from 'react-animated-weather';
 
 const CardMain = ({location, onUpdateInfo}) => {
 
+	console.log(onUpdateInfo);
+
 	if (onUpdateInfo === "" || onUpdateInfo === "pending") {
 
 		return (
