@@ -1,7 +1,6 @@
 import React from 'react';
 import { BarChart, CartesianGrid, XAxis, YAxis, Legend, Bar, Tooltip} from 'recharts';
 import moment from 'moment';
-import './Chart2.css';
 
 const Chart2 = ({data_set}) => {
 
